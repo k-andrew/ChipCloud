@@ -261,7 +261,7 @@ public class ChipCloud extends FlowLayout implements ChipListener {
       if(selectTransitionMS != -1) chipCloud.setSelectTransitionMS(selectTransitionMS);
       if(deselectTransitionMS != -1) chipCloud.setDeselectTransitionMS(deselectTransitionMS);
       chipCloud.setChipListener(chipListener);
-      chipCloud.addChips(labels);
+      if (labels != null && labels.length > 0)chipCloud.addChips(labels);
     }
   }
 }
