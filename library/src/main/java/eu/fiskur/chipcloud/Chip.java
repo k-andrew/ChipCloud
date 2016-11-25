@@ -43,12 +43,13 @@ public class Chip extends TextView implements View.OnClickListener {
         init();
     }
 
-    public void initChip(Context context, int index, String label, int selectedColor, int selectedFontColor, int unselectedColor, int unselectedFontColor, ChipCloud.Mode mode) {
+    public void initChip(Context context, int index, String label, int selectedColor, int selectedFontColor, int unselectedColor, int unselectedFontColor, ChipCloud.Mode mode, boolean selected) {
 
         this.index = index;
         this.selectedFontColor = selectedFontColor;
         this.unselectedFontColor = unselectedFontColor;
         this.mode = mode;
+        this.selected = selected;
 
         Drawable selectedDrawable = ContextCompat.getDrawable(context, R.drawable.chip_selected);
 
@@ -174,6 +175,7 @@ public class Chip extends TextView implements View.OnClickListener {
         private int chipHeight;
         private int selectTransitionMS = 750;
         private int deselectTransitionMS = 500;
+        private boolean selected;
 
         private ChipListener chipListener;
         private ChipCloud.Mode mode;
@@ -233,9 +235,14 @@ public class Chip extends TextView implements View.OnClickListener {
             return this;
         }
 
+        public ChipBuilder setSelection(boolean selected) {
+            this.selected = selected;
+            return this;
+        }
+
         public Chip build(Context context) {
             Chip chip = (Chip) LayoutInflater.from(context).inflate(R.layout.chip, null);
-            chip.initChip(context, index, label, selectedColor, selectedFontColor, unselectedColor, unselectedFontColor, mode);
+            chip.initChip(context, index, label, selectedColor, selectedFontColor, unselectedColor, unselectedFontColor, mode, selected);
             chip.setSelectTransitionMS(selectTransitionMS);
             chip.setDeselectTransitionMS(deselectTransitionMS);
             chip.setChipListener(chipListener);
